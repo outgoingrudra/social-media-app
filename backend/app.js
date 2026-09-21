@@ -1,26 +1,42 @@
-import express from "express";
-import { ConnectDB } from "./configs/db.js";
-import User from "./models/User.js";
+import express from "express"
 import dotenv from "dotenv"
-import authRouter from "./routes/authRoutes.js";
+import connectDB from "./configs/db.js"
+import authRouter from "./routes/authRoutes.js"
+import cookieParser from "cookie-parser"
+import userRouter from "./routes/userRoutes.js"
+import cors from "cors"
 dotenv.config()
+const app = express()
+app.use(cookieParser())
+app.use(express.json())
 
-const app = express();
-app.use(express.json());
+// change it 
 
-
-
-app.use("/auth", authRouter)
-
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true
+}));
 
 const PORT = process.env.PORT
-ConnectDB()
-  .then(() => {
-    app.listen(PORT, () => console.log("Server running on PORT :" + PORT));
-    console.log("Database connected Successfully !!");
-  })
-  .catch((err) => {
-    console.log("Error in connecting Database ");
-    console.log(err);
-    process.exit(1);
-  });
+
+app.get("/",(req,res)=>{
+    res.send("Welcome to our project ")
+})
+
+
+app.use("/auth",authRouter)
+app.use("/user",userRouter)
+
+
+connectDB()
+.then(()=>{
+            console.log("Connected to MongoDB Successfully ✅");
+            app.listen(PORT, ()=> { console.log("App / Server is  running on PORT : "+PORT)})  
+     })
+.catch((e)=>{
+        console.log("Connection Failed to MongoDB ❌ : "+ e);
+        process.exit(1)
+     })
+
+
+
