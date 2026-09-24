@@ -5,6 +5,7 @@ import authRouter from "./routes/authRoutes.js"
 import cookieParser from "cookie-parser"
 import userRouter from "./routes/userRoutes.js"
 import cors from "cors"
+import connectionRouter from "./routes/connectionRoutes.js"
 dotenv.config()
 const app = express()
 app.use(cookieParser())
@@ -26,6 +27,7 @@ app.get("/",(req,res)=>{
 
 app.use("/auth",authRouter)
 app.use("/user",userRouter)
+app.use("/connection", connectionRouter)
 
 
 connectDB()
