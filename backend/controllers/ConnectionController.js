@@ -89,7 +89,19 @@ export async function acceptConnection(req, res) {
   }
 }
 
-export async function rejectConnection(req, res) {}
+export async function rejectConnection(req, res) {
+  try {
+    const connectionId  = req.body.connectionId 
+    const connection  = await Connection.findById(connectionId)
+    if(connection.toUserId.equals(req.user._id)  ){
+        res.json({ success : true , message : "Connection Rejected "})
+       return  await Connection.findByIdAndDelete(connectionId)
+    }
+    return res.json({ success : false , message : "Connection is not  Rejected "})
+  } catch (error) {
+    return res.json({ success: false, message: "Internal Server Error" });
+  }
+}
 
 export async function getAllConnectionRequest(req, res) {
   try {
@@ -124,3 +136,31 @@ export async function getFriends(req, res) {
          return res.json({ success: false, message: "Internal Server Error" });
     }
 }
+
+export async function friendSugestions(req , res ) {
+  try {
+          const connections  = await Connection.find({
+            $or : [
+             {   fromUserId : req.user._id } ,
+             { toUserId: req.user._id}
+            ],
+        })
+        const set =  new Set()
+        for(let conn of connections){
+          set.add(conn.fromUserId)
+          set.add(conn.toUserId)
+        }
+
+        const suggestions = await User.find({
+            _id : { $nin : [...set] }
+        }).select("-password").limit(10)
+        return res.json({success : true , message :" Suggestions Fetched Successfully " , suggestions} )
+
+  } catch (error) {
+     return res.json({ success: false, message: "Internal Server Error" });
+  }
+}
+
+
+
+ 

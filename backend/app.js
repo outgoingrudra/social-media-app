@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser"
 import userRouter from "./routes/userRoutes.js"
 import cors from "cors"
 import connectionRouter from "./routes/connectionRoutes.js"
+import postRouter from "./routes/PostRoutes.js"
 dotenv.config()
 const app = express()
 app.use(cookieParser())
@@ -28,6 +29,7 @@ app.get("/",(req,res)=>{
 app.use("/auth",authRouter)
 app.use("/user",userRouter)
 app.use("/connection", connectionRouter)
+app.use("/post",postRouter )
 
 
 connectDB()
