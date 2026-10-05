@@ -4,10 +4,10 @@ import { deletePost, getAllPosts, getFeedPosts, likePost, uploadPost } from "../
 
 const postRouter  = express.Router()
 
-postRouter.get("all-posts" ,  getAllPosts)
-postRouter.get("posts" ,  getFeedPosts)
-postRouter.post("upload" , auth ,  uploadPost)
-postRouter.delete("delete" , auth ,  deletePost)
-postRouter.delete("like" , auth ,  likePost)
+postRouter.get("/all-posts" ,auth ,   getAllPosts)
+postRouter.get("/posts" ,auth ,   getFeedPosts)
+postRouter.post("/upload" , auth ,  uploadPost)
+postRouter.delete("/delete" , auth ,  deletePost)
+postRouter.delete("/like" , auth ,  likePost)
 
 export default postRouter

@@ -10,6 +10,11 @@ export async function signup(req, res) {
   
   try {
     let { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res
+        .status(401)
+        .json({ success: false, message: "name , email or password missing " });
+    }
     name = name.trim();
     email = email.trim();
     password = password.trim();
@@ -48,6 +53,11 @@ export async function signup(req, res) {
 export async function login(req, res) {
   try {
     let { email, password } = req.body;
+     if ( !email || !password) {
+      return res
+        .status(401)
+        .json({ success: false, message: "email or password missing " });
+    }
 
     email = email.trim();
     password = password.trim();
