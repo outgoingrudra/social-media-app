@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 export default function Home() {
-   const BACKEND_URL = import.meta.env.BACKEND_URL
+   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
   const [user , setUser] = useState({})
   useEffect(()=>{
          fetch(BACKEND_URL + "/user/profile" , { credentials: 'include'})

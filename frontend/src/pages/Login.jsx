@@ -7,7 +7,7 @@ export default function Login() {
     
   async function loggedIn() {
 
-    const BACKEND_URL = import.meta.env.BACKEND_URL
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
   
        try {
           if( email && password){

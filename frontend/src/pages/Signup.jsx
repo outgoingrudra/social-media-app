@@ -7,7 +7,7 @@ export default function Signup() {
 
     
   async function register() {
-     const BACKEND_URL = import.meta.env.BACKEND_URL
+     const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
   
        try {
           if(name && email && password){
