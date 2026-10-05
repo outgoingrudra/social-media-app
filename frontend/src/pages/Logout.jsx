@@ -1,11 +1,13 @@
 import React from 'react'
 
 export default function Logout() {
+
+  const BACKEND_URL = import.meta.env.BACKEND_URL
    
  async  function logoutWork() {
      try {
         
-                const res  = await fetch("http://localhost:3000/auth/logout", {
+                const res  = await fetch( BACKEND_URL + "/auth/logout", {
                   method : 'POST',
                   credentials: 'include', 
                 })
@@ -16,9 +18,7 @@ export default function Logout() {
             
        } catch (error) {
         console.log(error);
-       }
-
-      
+       }      
     
   }
 

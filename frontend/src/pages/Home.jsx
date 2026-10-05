@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 export default function Home() {
+   const BACKEND_URL = import.meta.env.BACKEND_URL
   const [user , setUser] = useState({})
   useEffect(()=>{
-         fetch("http://localhost:3000/user/profile" , { credentials: 'include'})
+         fetch(BACKEND_URL + "/user/profile" , { credentials: 'include'})
          .then((res)=> res.json())
          .then((res)=> {
           if(res.success==false) {

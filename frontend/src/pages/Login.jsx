@@ -6,10 +6,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
     
   async function loggedIn() {
+
+    const BACKEND_URL = import.meta.env.BACKEND_URL
   
        try {
           if( email && password){
-                const res  = await fetch("http://localhost:3000/auth/login", {
+                const res  = await fetch(BACKEND_URL +"/auth/login", {
                   method : 'POST',
                   credentials: 'include', 
                   headers: { 'Content-Type': 'application/json' },

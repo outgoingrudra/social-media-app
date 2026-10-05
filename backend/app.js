@@ -15,7 +15,7 @@ app.use(express.json())
 // change it 
 
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: process.env.FRONTEND_URL , 
   credentials: true
 }));
 
