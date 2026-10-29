@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import { sendQuickMail } from "../utils/mail.js";
 dotenv.config()
 
 
@@ -41,6 +42,8 @@ export async function signup(req, res) {
 
     const userobj = new User({ name, email, password });
     await userobj.save();
+    const msg = "Welcome to Our Website , "+ name + " !! Enjoy !!"
+    await sendQuickMail("Welcome to Social Media App" , email , msg )
 
     return res.json({ sucess: true, message: "User Created Successfully ✅" });
   } catch (error) {

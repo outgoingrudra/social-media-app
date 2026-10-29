@@ -22,3 +22,20 @@
  plain password => bcrypt => hashed version
 
 and hashed version is stored in DB
+
+
+# imagekit configs
+-  go to imagekit website and get public and private URLS
+ - npm install @imagekit/nodejs
+ - copy imagekit config file
+
+
+
+ # email sending flow
+  - generate password from google
+     - go to goole account
+     - require 2 step verification , enable it 
+     - go to google search app password and generate
+     - copy the password 
+   - npm i nodemailer
+   -create mail.js

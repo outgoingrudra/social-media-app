@@ -8,6 +8,6 @@ postRouter.get("/all-posts" ,auth ,   getAllPosts)
 postRouter.get("/posts" ,auth ,   getFeedPosts)
 postRouter.post("/upload" , auth ,  uploadPost)
 postRouter.delete("/delete" , auth ,  deletePost)
-postRouter.delete("/like" , auth ,  likePost)
+postRouter.patch("/like" , auth ,  likePost)
 
 export default postRouter
